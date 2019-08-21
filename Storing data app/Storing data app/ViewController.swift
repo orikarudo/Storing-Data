@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        loadFromPhone()
         
         
     }
@@ -19,6 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         input.becomeFirstResponder()
+        loadFromPhone()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -60,6 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var input: UITextField!
     @IBOutlet weak var total: UILabel!
     @IBAction func add(_ sender: Any) {
+        loadFromPhone()
         inputList.append(Int(input.text!) ?? 0)
         print(inputList)
         tableView?.reloadData()
@@ -68,6 +72,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         temp = temp! + temp2
         total.text = String(temp!)
         input.text = ""
+        saveToPhone()
         
     }
     @IBAction func clear(_ sender: Any) {
@@ -77,6 +82,15 @@ class ViewController: UIViewController, UITableViewDataSource {
         input.text = ""
         
         
+    }
+    
+    let defaults = UserDefaults.standard
+    func saveToPhone() {
+        defaults.set(inputList, forKey: "list1")
+    }
+    
+    func loadFromPhone() {
+        inputList = defaults.array(forKey: "list1") as? [Int] ?? [Int]()
     }
     
 
