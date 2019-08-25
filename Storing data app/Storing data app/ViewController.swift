@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 class ViewController: UIViewController, UITableViewDataSource {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -63,7 +64,6 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var input: UITextField!
     @IBOutlet weak var total: UILabel!
     @IBAction func add(_ sender: Any) {
-        loadFromPhone()
         inputList.append(Int(input.text!) ?? 0)
         print(inputList)
         tableView?.reloadData()
@@ -80,6 +80,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         tableView?.reloadData()
         total.text = "0"
         input.text = ""
+        
         
         
     }
